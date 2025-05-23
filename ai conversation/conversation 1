@@ -1,0 +1,52 @@
+Tool: ChatGPT
+Date: 2025-04-15
+
+Me: I want to build a simple weather app in Python that tells me the temperature and condition in my city.
+
+AI: You can use an API like weatherapi.com. Use the requests library to fetch data. Here's a starter snippet:
+
+import requests
+api_url = "https://api.weatherapi.com/v1/current.json"
+key = "your_api_key"
+location = "Perth"
+response = requests.get(f"{api_url}?key={key}&q={location}")
+data = response.json()
+print(data)
+
+Me: This works, but how do I extract just the temperature and condition?
+
+AI: Use this structure to access the keys in the response:
+
+temp = data["current"]["temp_c"]
+condition = data["current"]["condition"]["text"]
+
+Me: What if the keys are missing? I want to avoid errors.
+
+AI: Wrap the access in a try/except block:
+
+try:
+    temp = data["current"]["temp_c"]
+    condition = data["current"]["condition"]["text"]
+except KeyError:
+    temp = None
+    condition = "Unknown"
+
+Me: Great. Can I make the output friendlier?
+
+AI: Sure, use emojis and formatted strings:
+
+if temp is not None:
+    print(f"🌡️ Temperature in {location}: {temp}°C")
+else:
+    print("⚠️ Temperature data not available.")
+print(f"☁️ Condition: {condition}")
+
+Me: I want to log this data to a file. What’s the best way?
+
+AI: Use Python’s with open block to write to a log:
+
+with open("log.txt", "a") as log:
+    log.write(f"{location}: {temp}C, {condition}\n")
+
+Me: Thanks, this got me to a working 22-line weather app!
+
