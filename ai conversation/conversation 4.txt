@@ -1,0 +1,28 @@
+Tool: ChatGPT
+Date: 2025-04-20
+
+Me: I want to turn this into a function so I can reuse it.
+
+AI: Create a function that takes location as a parameter:
+
+def get_weather(location):
+    try:
+        response = requests.get(f"{api_url}?key={key}&q={location}")
+        data = response.json()
+        if "error" in data:
+            return None
+        return data
+    except:
+        return None
+
+Me: And then I can call it like this?
+
+AI: Exactly:
+
+weather = get_weather("Sydney")
+if weather:
+    print(weather["current"]["temp_c"])
+else:
+    print("Error fetching weather.")
+
+Me: Awesome, now I can build more on top!
