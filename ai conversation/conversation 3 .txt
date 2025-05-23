@@ -1,0 +1,30 @@
+Tool: ChatGPT
+Date: 2025-04-18
+
+Me: How can I make this app retry if the API call fails?
+
+AI: Wrap the request in a try/except block and use requests.exceptions.RequestException:
+
+try:
+    response = requests.get(f"{api_url}?key={key}&q={location}")
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print("🌐 Network error:", e)
+    exit()
+
+Me: Can we add a retry loop?
+
+AI: Sure. Here's a simple retry loop with 3 attempts:
+
+for i in range(3):
+    try:
+        response = requests.get(f"{api_url}?key={key}&q={location}")
+        data = response.json()
+        break
+    except requests.exceptions.RequestException:
+        print(f"Attempt {i+1} failed. Retrying...")
+else:
+    print("⚠️ Could not connect after 3 attempts.")
+    exit()
+
+Me: Perfect. Now it’s more robust. 
