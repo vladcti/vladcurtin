@@ -1,0 +1,32 @@
+Tool: ChatGPT
+Date: 2025-04-17
+
+Me: I want to allow users to input their city instead of hardcoding it.
+
+AI: Use input() to prompt the user:
+
+location = input("Enter your city: ")
+
+Me: Can I make sure they don't leave it blank?
+
+AI: Yes, loop until a non-empty string is entered:
+
+while not location.strip():
+    location = input("City name can’t be blank. Enter your city: ")
+
+Me: Cool. Now how do I handle an invalid city name?
+
+AI: Check the API response for an error message:
+
+if "error" in data:
+    print("❌ Invalid city name. Please try again.")
+    exit()
+
+Me: Can we show the local time too?
+
+AI: Sure. Extract it like this:
+
+local_time = data["location"]["localtime"]
+print(f"🕒 Local time in {location}: {local_time}")
+
+Me: Thanks, this helps make it more interactive.
