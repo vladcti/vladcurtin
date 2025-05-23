@@ -1,0 +1,20 @@
+Tool: ChatGPT
+Date: 2025-04-19
+
+Me: I want to show both Celsius and Fahrenheit temperatures.
+
+AI: You can extract both from the API if available. If not, convert manually:
+
+temp_c = data["current"]["temp_c"]
+temp_f = (temp_c * 9/5) + 32
+print(f"🌡️ Temperature: {temp_c}°C / {temp_f:.1f}°F")
+
+Me: Can I show weather icons too?
+
+AI: Yes, use the icon URL provided in the API:
+
+icon_url = "https:" + data["current"]["condition"]["icon"]
+print(f"🌦️ Icon URL: {icon_url}")
+
+Me: Thanks! I might later add GUI support.
+
